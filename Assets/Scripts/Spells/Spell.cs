@@ -54,10 +54,8 @@ public class Spell : MonoBehaviour
             }
             else if (spellSO.spellType == SpellSO.SpellType.AOE)
             {
-                Debug.Log($"Collider enter trigger area");
                 if (other.CompareTag(TagConstants.ENEMY) && !triggerList.Contains(other))
                 {
-                    Debug.Log($"Add {other.gameObject} to the trigger list");
                     triggerList.Add(other);
                 }
             }

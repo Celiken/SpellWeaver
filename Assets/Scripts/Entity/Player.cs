@@ -15,12 +15,13 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform spellCastPoint;
     [SerializeField] private Transform spellAuraPoint;
 
-    [SerializeField] private Animator UIAnimator;
-    [SerializeField] private TextMeshProUGUI damageUI;
+    [SerializeField] private Transform damagePopupPosition;
 
     private CharacterController characterController;
     private NavMeshAgent agent;
+
     private HealthComponent healthComponent;
+    private ManaComponent manaComponent;
 
     private bool isWalking;
 
@@ -31,12 +32,11 @@ public class Player : MonoBehaviour
 
     private float dashCooldownMax = 5f;
     private float dashCooldown;
-    private int MP = 345;
-    private int MPMax = 1000;
 
     private void Awake()
     {
         Instance = this;
+        manaComponent = GetComponent<ManaComponent>();
         healthComponent = GetComponent<HealthComponent>();
         agent = GetComponent<NavMeshAgent>();
         characterController = GetComponent<CharacterController>();
@@ -44,7 +44,6 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        damageUI.gameObject.SetActive(false);
         GameInput.Instance.OnDash += GameInput_OnDash;
         GameInput.Instance.OnAim += GameInput_OnAim;
     }
@@ -133,9 +132,7 @@ public class Player : MonoBehaviour
     public void GetHit(int damage)
     {
         healthComponent.TakeDamage(damage);
-        damageUI.text = damage.ToString();
-        damageUI.gameObject.SetActive(true);
-        UIAnimator.SetTrigger(TOOK_DAMAGE_UI);
+        DamagePopup.Create(damagePopupPosition.position, -1 * damage, DamagePopup.Font.DamageTaken);
     }
 
     public float GetHPPercent()
@@ -145,8 +142,17 @@ public class Player : MonoBehaviour
 
     public float GetMPPercent()
     {
-        return (float)MP / MPMax;
+        return manaComponent.GetMPPercent();
     }
+    public void UseMana(float manaCost)
+    {
+        manaComponent.UseMana(manaCost);
+    }
+    public bool HasEnoughMana(float manaCost)
+    {
+        return manaComponent.HasEnoughMana(manaCost);
+    }
+
     public float GetDashCDPercent()
     {
         return dashCooldown / dashCooldownMax;

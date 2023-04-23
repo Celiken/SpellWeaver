@@ -14,6 +14,8 @@ public class SpellUI : MonoBehaviour
 
     [SerializeField] private Transform cooldownUI;
 
+    private Player player;
+
     private InputAction spellTrigger;
 
     private bool available = true;
@@ -22,6 +24,7 @@ public class SpellUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = Player.Instance;
         HideCooldownUI();
     }
 
@@ -57,16 +60,17 @@ public class SpellUI : MonoBehaviour
 
     private void UseSpell()
     {
-        if (available)
+        if (available && player.HasEnoughMana(spellSO.spellMana))
         {
             cooldownTimer = spellSO.spellCooldown;
             available = false;
+            player.UseMana(spellSO.spellMana);
             ShowCooldownUI();
             GameObject spellObj = null;
             if (spellSO.spellType == SpellSO.SpellType.Projectile)
             {
-                Player.Instance.Aim();
-                spellObj = Instantiate(spellSO.spellPrefab, Player.Instance.GetCastPoint().position, Player.Instance.GetCastPoint().rotation);
+                player.Aim();
+                spellObj = Instantiate(spellSO.spellPrefab, player.GetCastPoint().position, player.GetCastPoint().rotation);
             }
             else if (spellSO.spellType == SpellSO.SpellType.AOE)
             {

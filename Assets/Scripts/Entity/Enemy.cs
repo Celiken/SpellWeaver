@@ -17,13 +17,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float attackCooldown;
     [SerializeField] private int damage;
 
-    [SerializeField] private Animator UIAnimator;
-    [SerializeField] private TextMeshProUGUI damageUI;
+    [SerializeField] private Transform damagePopupPosition;
 
     private float nextAttackTimer;
+    private float startAttacking;
+    private float delayBeforeFirstHit = 2f;
+    private bool isMelee;
 
     private void Awake()
     {
+        isMelee = false;
         nextAttackTimer = 0f;
         agent = GetComponent<NavMeshAgent>();
         healthComponent = GetComponent<HealthComponent>();
@@ -32,7 +35,6 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        damageUI.gameObject.SetActive(false);
         player = Player.Instance;
         UpdateHPBar();
     }
@@ -44,10 +46,26 @@ public class Enemy : MonoBehaviour
         {
             if (nextAttackTimer > 0f) nextAttackTimer -= Time.deltaTime;
             agent.destination = player.transform.position;
-            if ((transform.position - player.transform.position).magnitude <= rangeAttack && nextAttackTimer <= 0f)
+            if ((transform.position - player.transform.position).magnitude <= rangeAttack)
             {
-                player.GetHit(damage);
-                nextAttackTimer = attackCooldown;
+                Vector3 lookDirection = (player.transform.position - transform.position).normalized;
+                transform.forward = lookDirection;
+                if (isMelee)
+                {
+                    startAttacking -= Time.deltaTime;
+                    if (nextAttackTimer <= 0f && startAttacking <= 0f)
+                    {
+                        player.GetHit(damage);
+                        nextAttackTimer = attackCooldown;
+                    }
+                } else
+                {
+                    isMelee = true;
+                    startAttacking = delayBeforeFirstHit;
+                }
+            } else
+            {
+                isMelee = false;
             }
         }
     }
@@ -55,9 +73,7 @@ public class Enemy : MonoBehaviour
     public void GetHit(int damage)
     {
         healthComponent.TakeDamage(damage);
-        damageUI.text = damage.ToString();
-        damageUI.gameObject.SetActive(true);
-        UIAnimator.SetTrigger(TOOK_DAMAGE_UI);
+        DamagePopup.Create(damagePopupPosition.position, damage, DamagePopup.Font.DamageDeal);
         UpdateHPBar();
         if (healthComponent.IsDead())
         {
