@@ -51,10 +51,6 @@ public class GameInput : MonoBehaviour
                 return inputActions.Player.Spell3;
             case 4:
                 return inputActions.Player.Spell4;
-            case 5:
-                return inputActions.Player.Spell5;
-            case 6:
-                return inputActions.Player.Spell5;
         }
     }
 }

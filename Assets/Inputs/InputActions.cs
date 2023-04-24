@@ -89,24 +89,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Spell 5"",
-                    ""type"": ""Button"",
-                    ""id"": ""1f08b4ec-ee75-46a3-a4d0-b55c6f22b55f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Spell 6"",
-                    ""type"": ""Button"",
-                    ""id"": ""f2a32b32-bdfc-4526-bc8e-2fa1ab14faef"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -157,22 +139,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""80821df4-d989-479e-af97-9bcfd1e54124"",
-                    ""path"": ""<Keyboard>/a"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Spell 4"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""00001e0e-cce7-46f1-8a5f-962a4a305202"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Spell 5"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -184,17 +155,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""cb8fd44d-aa9d-47ae-8bb5-827d75409e56"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Spell 6"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -223,8 +183,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Spell2 = m_Player.FindAction("Spell 2", throwIfNotFound: true);
         m_Player_Spell3 = m_Player.FindAction("Spell 3", throwIfNotFound: true);
         m_Player_Spell4 = m_Player.FindAction("Spell 4", throwIfNotFound: true);
-        m_Player_Spell5 = m_Player.FindAction("Spell 5", throwIfNotFound: true);
-        m_Player_Spell6 = m_Player.FindAction("Spell 6", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,8 +251,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Spell2;
     private readonly InputAction m_Player_Spell3;
     private readonly InputAction m_Player_Spell4;
-    private readonly InputAction m_Player_Spell5;
-    private readonly InputAction m_Player_Spell6;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -306,8 +262,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Spell2 => m_Wrapper.m_Player_Spell2;
         public InputAction @Spell3 => m_Wrapper.m_Player_Spell3;
         public InputAction @Spell4 => m_Wrapper.m_Player_Spell4;
-        public InputAction @Spell5 => m_Wrapper.m_Player_Spell5;
-        public InputAction @Spell6 => m_Wrapper.m_Player_Spell6;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -338,12 +292,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Spell4.started += instance.OnSpell4;
             @Spell4.performed += instance.OnSpell4;
             @Spell4.canceled += instance.OnSpell4;
-            @Spell5.started += instance.OnSpell5;
-            @Spell5.performed += instance.OnSpell5;
-            @Spell5.canceled += instance.OnSpell5;
-            @Spell6.started += instance.OnSpell6;
-            @Spell6.performed += instance.OnSpell6;
-            @Spell6.canceled += instance.OnSpell6;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -369,12 +317,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Spell4.started -= instance.OnSpell4;
             @Spell4.performed -= instance.OnSpell4;
             @Spell4.canceled -= instance.OnSpell4;
-            @Spell5.started -= instance.OnSpell5;
-            @Spell5.performed -= instance.OnSpell5;
-            @Spell5.canceled -= instance.OnSpell5;
-            @Spell6.started -= instance.OnSpell6;
-            @Spell6.performed -= instance.OnSpell6;
-            @Spell6.canceled -= instance.OnSpell6;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -401,7 +343,5 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnSpell2(InputAction.CallbackContext context);
         void OnSpell3(InputAction.CallbackContext context);
         void OnSpell4(InputAction.CallbackContext context);
-        void OnSpell5(InputAction.CallbackContext context);
-        void OnSpell6(InputAction.CallbackContext context);
     }
 }

@@ -66,11 +66,12 @@ public class SpellUI : MonoBehaviour
             available = false;
             player.UseMana(spellSO.spellMana);
             ShowCooldownUI();
-            GameObject spellObj = null;
+            GameObject spellObj;
             if (spellSO.spellType == SpellSO.SpellType.Projectile)
             {
                 player.Aim();
                 spellObj = Instantiate(spellSO.spellPrefab, player.GetCastPoint().position, player.GetCastPoint().rotation);
+                spellObj?.GetComponent<ProjectileSpell>().SetSpellSO(spellSO as ProjectileSpellSO);
             }
             else if (spellSO.spellType == SpellSO.SpellType.AOE)
             {
@@ -80,10 +81,15 @@ public class SpellUI : MonoBehaviour
                     if (hit.collider.CompareTag(TagConstants.GROUND))
                     {
                         spellObj = Instantiate(spellSO.spellPrefab, hit.point, Quaternion.identity);
+                        spellObj?.GetComponent<AOESpell>().SetSpellSO(spellSO as AOESpellSO);
                     }
                 }
             }
-            spellObj?.GetComponent<Spell>().SetSpellSO(spellSO);
+            else if (spellSO.spellType == SpellSO.SpellType.PlayerCenteredAOE)
+            {
+                spellObj = Instantiate(spellSO.spellPrefab, player.transform.position, Quaternion.identity);
+                spellObj?.GetComponent<AOESpell>().SetSpellSO(spellSO as AOESpellSO);
+            }
         }
     }
 

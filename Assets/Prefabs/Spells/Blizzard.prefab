@@ -28,12 +28,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165344715790342584}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7881303032427657224}
-  m_RootOrder: 2
+  m_Father: {fileID: 1749473923654954741}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7541068620177453889
 MonoBehaviour:
@@ -6183,7 +6183,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3974444953510359478}
   m_Father: {fileID: 7881303032427657224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15289,7 +15290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7881303032427657224}
-  - component: {fileID: 4403389288078625161}
+  - component: {fileID: 6388991586296590995}
   - component: {fileID: 5889144003910379511}
   - component: {fileID: 6187148532815468049}
   m_Layer: 0
@@ -15313,11 +15314,10 @@ Transform:
   m_Children:
   - {fileID: 1749473923654954741}
   - {fileID: 673661948130952887}
-  - {fileID: 3974444953510359478}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4403389288078625161
+--- !u!114 &6388991586296590995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15326,11 +15326,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 9157512581488151263}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b06a9138646b8674d86daef40e353d29, type: 3}
+  m_Script: {fileID: 11500000, guid: b7e200fc33708964286757e53f31f1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellSO: {fileID: 11400000, guid: 8907b5dc43b97334db7309f065e49fbb, type: 2}
   emitter: {fileID: 2308491380513197791}
+  spellSO: {fileID: 11400000, guid: c2bd6eee00369e34f898be02bdc35db9, type: 2}
 --- !u!135 &5889144003910379511
 SphereCollider:
   m_ObjectHideFlags: 0

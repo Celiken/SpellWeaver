@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9a20502e8d77c4b90f804dda6bcb4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f645e5ce3d6ae9468b44d698f37fbf5, type: 3}
   m_Name: Arcane Bolt
   m_EditorClassIdentifier: 
   spellName: Arcane Bolt
@@ -19,7 +19,6 @@ MonoBehaviour:
   spellPrefab: {fileID: 9157512581488151263, guid: 1ddd18420a9e8d64b9be85a52188d4e2,
     type: 3}
   spellType: 0
-  spellSpeed: 20
   spellLifetime: 1
   spellDamage: 25
-  spellTick: 0
+  spellSpeed: 25

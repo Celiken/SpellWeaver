@@ -388,9 +388,9 @@ GameObject:
   - component: {fileID: 1743683010695716404}
   - component: {fileID: 1743683010695716405}
   - component: {fileID: 2383487085491938075}
-  - component: {fileID: 1743683010695716403}
-  - component: {fileID: 1743683010695716400}
   - component: {fileID: 2052581061215081659}
+  - component: {fileID: 1743683010695716400}
+  - component: {fileID: 1743683010695716403}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -448,6 +448,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HPMax: 1000
+--- !u!114 &2052581061215081659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743683010695716407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f8c6e80a27949f44be7e7a84da42c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MPMax: 1000
+  MPRegen: 10
+--- !u!143 &1743683010695716400
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743683010695716407}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.6
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!195 &1743683010695716403
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -470,38 +502,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!143 &1743683010695716400
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743683010695716407}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1.6
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &2052581061215081659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743683010695716407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f8c6e80a27949f44be7e7a84da42c40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MPMax: 1000
-  MPRegen: 10
 --- !u!1 &1743683010963156855
 GameObject:
   m_ObjectHideFlags: 0

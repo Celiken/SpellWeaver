@@ -9,17 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec9a20502e8d77c4b90f804dda6bcb4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6f645e5ce3d6ae9468b44d698f37fbf5, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
   spellName: Fireball
   spellIcon: {fileID: 21300000, guid: dd3885098198d104888439be4c590aba, type: 3}
-  spellCooldown: 10
-  spellMana: 500
+  spellCooldown: 3
+  spellMana: 100
   spellPrefab: {fileID: 9157512581488151263, guid: f8655ac856843f74c9d3a6676ae6ed93,
     type: 3}
   spellType: 0
-  spellSpeed: 3
   spellLifetime: 5
   spellDamage: 100
-  spellTick: 0
+  spellSpeed: 5

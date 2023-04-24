@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[CreateAssetMenu]
 public class SpellSO : ScriptableObject
 {
     public enum SpellType
     {
         Projectile,
-        Aura,
         AOE,
         PlayerCenteredAOE
     }
@@ -18,8 +16,6 @@ public class SpellSO : ScriptableObject
     public int spellMana;
     public GameObject spellPrefab;
     public SpellType spellType;
-    public float spellSpeed;
     public float spellLifetime;
     public int spellDamage;
-    public int spellTick;
 }
