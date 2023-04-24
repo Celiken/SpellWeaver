@@ -135,8 +135,30 @@ MonoBehaviour:
   parentEnemy: {fileID: 0}
   enemyPrefab: {fileID: 7646472991614712235, guid: bedf5160e41b5604aba19969c50ac131,
     type: 3}
-  spawnTimerMin: 5
-  spawnTimerMax: 10
+  distanceMultiplier:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0008239746
+      value: 0.02508545
+      inSlope: 6.464545
+      outSlope: 6.464545
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.17872873
+    - serializedVersion: 3
+      time: 1
+      value: 10
+      inSlope: 1.2637548
+      outSlope: 1.2637548
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.20448263
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   spawnPoints: []
 --- !u!1 &4771107137151955100
 GameObject:

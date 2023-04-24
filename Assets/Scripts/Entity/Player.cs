@@ -66,6 +66,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        GameInput.Instance.OnDash -= GameInput_OnDash;
+    }
+
     private void Move()
     {
         Vector2 inputVector = GameInput.Instance.GetMoveInput();

@@ -21,6 +21,13 @@ public class SpellUI : MonoBehaviour
     private bool available = true;
     private float cooldownTimer = 0f;
 
+    private bool guideBlocker;
+
+    private void Awake()
+    {
+        guideBlocker = true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +38,7 @@ public class SpellUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (guideBlocker) guideBlocker = !GameManager.Instance.IsGameStarted();
         if (!available)
         {
             cooldownTimer -= Time.deltaTime;
@@ -41,6 +49,11 @@ public class SpellUI : MonoBehaviour
                 HideCooldownUI();
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        spellTrigger.performed -= SpellTrigger_performed;
     }
 
     public void SetSpell(SpellSO spellSo, int spellSlot)
@@ -60,7 +73,7 @@ public class SpellUI : MonoBehaviour
 
     private void UseSpell()
     {
-        if (available && player.HasEnoughMana(spellSO.spellMana))
+        if (!guideBlocker && available && player.HasEnoughMana(spellSO.spellMana))
         {
             cooldownTimer = spellSO.spellCooldown;
             available = false;

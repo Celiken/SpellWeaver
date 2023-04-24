@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -7,9 +5,16 @@ public class Spawner : MonoBehaviour
 {
     [SerializeField] private Transform parentEnemy;
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private float spawnTimerMin = 5f;
-    [SerializeField] private float spawnTimerMax = 10f;
+    [SerializeField] private AnimationCurve distanceMultiplier;
     [SerializeField] private Transform[] spawnPoints;
+
+    private float minDistanceMultiplier = 5f;
+    private float maxDistanceMultiplier = 25f;
+
+    private float minTimerSpawn = 8f;
+    private float maxTimerSpawn = 15f;
+
+    private Player player;
 
     private float spawnTimer;
 
@@ -21,12 +26,15 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        spawnTimer = Random.Range(1, spawnTimerMax);
+        player = Player.Instance;
+        WaitForNextSpawn();
     }
 
     private void Update()
     {
-        spawnTimer -= Time.deltaTime;
+        float clampedPlayerDist = Mathf.Clamp((player.transform.position - transform.position).magnitude, minDistanceMultiplier, maxDistanceMultiplier);
+        float relativeValue = 1 - (clampedPlayerDist - minDistanceMultiplier) / (maxDistanceMultiplier - minDistanceMultiplier);
+        spawnTimer -= Time.deltaTime * (1f + distanceMultiplier.Evaluate(relativeValue));
         if (spawnTimer < 0f)
         {
             SpawnEnemy();
@@ -35,7 +43,7 @@ public class Spawner : MonoBehaviour
 
     private void WaitForNextSpawn()
     {
-        spawnTimer = Random.Range(spawnTimerMin, spawnTimerMax);
+        spawnTimer = Random.Range(minTimerSpawn, maxTimerSpawn);
     }
 
     private void SpawnEnemy()

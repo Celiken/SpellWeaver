@@ -21,6 +21,12 @@ public class GameInput : MonoBehaviour
         inputActions.Player.Dash.performed += Dash_performed;
     }
 
+    private void OnDestroy()
+    {
+        inputActions.Player.Dash.performed -= Dash_performed;
+        inputActions.Dispose();
+    }
+
     public Vector2 GetMoveInput()
     {
         return inputActions.Player.Move.ReadValue<Vector2>().normalized;
