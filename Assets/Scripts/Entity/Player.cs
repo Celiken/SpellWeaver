@@ -1,16 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour
 {
     public static Player Instance;
-
-    private const string TOOK_DAMAGE_UI = "TookDamage";
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
