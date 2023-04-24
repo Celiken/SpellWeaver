@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Image HPBar;
     [SerializeField] private float rangeAttack;
+    [SerializeField] private float delayBeforeFirstHit;
     [SerializeField] private float attackCooldown;
     [SerializeField] private int damage;
 
@@ -21,7 +22,6 @@ public class Enemy : MonoBehaviour
 
     private float nextAttackTimer;
     private float startAttacking;
-    private float delayBeforeFirstHit = 2f;
     private bool isMelee;
 
     private void Awake()

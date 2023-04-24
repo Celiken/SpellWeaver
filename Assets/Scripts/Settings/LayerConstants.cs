@@ -12,4 +12,5 @@ public static class LayerConstants
     public static int MINIMAP = 6;
     public static int SPAWNER_INFO = 7;
     public static int GROUND = 8;
+    public static int SPELL = 9;
 }

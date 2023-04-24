@@ -513,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HPBar: {fileID: 5775595684205853004}
   rangeAttack: 2
+  delayBeforeFirstHit: 0.5
   attackCooldown: 5
   damage: 10
   damagePopupPosition: {fileID: 9028948539157240699}

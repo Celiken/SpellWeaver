@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -11,11 +12,15 @@ public class Player : MonoBehaviour
 
     private const string TOOK_DAMAGE_UI = "TookDamage";
 
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotateSpeed;
     [SerializeField] private float dashSpeed;
     [SerializeField] private Transform spellCastPoint;
     [SerializeField] private Transform spellAuraPoint;
 
     [SerializeField] private Transform damagePopupPosition;
+
+    [SerializeField] private LayerMask layerMoveRaycast;
 
     private CharacterController characterController;
     private NavMeshAgent agent;
@@ -45,7 +50,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         GameInput.Instance.OnDash += GameInput_OnDash;
-        GameInput.Instance.OnAim += GameInput_OnAim;
     }
 
     void Update()
@@ -63,58 +67,62 @@ public class Player : MonoBehaviour
             }
         }
         else
+        {
             Move();
-
+            Aim();
+        }
     }
 
     private void Move()
     {
-        if (GameInput.Instance.GetMoveInput() == 1f)
+        Vector2 inputVector = GameInput.Instance.GetMoveInput();
+
+        Vector3 moveDir = new(inputVector.x, 0f, inputVector.y);
+
+        float moveDistance = moveSpeed * Time.deltaTime;
+        float playerRadius = 0.7f;
+        float playerHeight = 2f;
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDir, moveDistance, layerMoveRaycast);
+        if (!canMove)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 1 << LayerConstants.GROUND))
+            Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
+            canMove = (moveDir.x < -.5f || moveDir.x > .5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance, layerMoveRaycast);
+            if (canMove)
+                moveDir = moveDirX;
+            else
             {
-                if (hit.collider.CompareTag(TagConstants.GROUND))
-                {
-                    agent.SetDestination(hit.point);
-                }
+                Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
+                canMove = (moveDir.z < -.5f || moveDir.z > .5f) && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance, layerMoveRaycast);
+                if (canMove)
+                    moveDir = moveDirZ;
             }
         }
+        if (canMove)
+            transform.position += moveDir * moveDistance;
+
+        dashDirection = moveDir;
+        isWalking = moveDir != Vector3.zero;
     }
 
     private void GameInput_OnDash(object sender, System.EventArgs e)
     {
         if (dashCooldown <= 0f)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 1 << LayerConstants.GROUND))
-            {
-                if (hit.collider.CompareTag(TagConstants.GROUND))
-                {
-                    dashDirection = (hit.point - transform.position).normalized;
-                    isDashing = true;
-                    dashTimer = 0f;
-                    dashCooldown = dashCooldownMax;
-                }
-            }
+            isDashing = true;
+            dashTimer = 0f;
+            dashCooldown = dashCooldownMax;
         }
-    }
-
-    private void GameInput_OnAim(object sender, System.EventArgs e)
-    {
-        Aim();
     }
 
     public void Aim()
     {
-        agent.ResetPath();
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, 1 << LayerConstants.GROUND))
         {
             if (hit.collider.CompareTag(TagConstants.GROUND))
             {
                 Vector3 lookDirection = (hit.point - transform.position).normalized;
-                transform.forward = lookDirection;
+                transform.forward = Vector3.Slerp(transform.forward, lookDirection, Time.deltaTime * rotateSpeed);
             }
         }
     }

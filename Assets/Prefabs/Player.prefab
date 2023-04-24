@@ -405,7 +405,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743683010695716407}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -431,10 +431,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e23897688339b8479edec2397393ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 7
+  rotateSpeed: 10
   dashSpeed: 50
   spellCastPoint: {fileID: 1743683009816318592}
   spellAuraPoint: {fileID: 1743683010963156852}
   damagePopupPosition: {fileID: 6475356635575143468}
+  layerMoveRaycast:
+    serializedVersion: 2
+    m_Bits: 503
 --- !u!114 &2383487085491938075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d4a16b753ef22146a1a1685322d161c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPMax: 1000
+  HPMax: 200
 --- !u!114 &2052581061215081659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,7 +466,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MPMax: 1000
-  MPRegen: 10
+  MPRegen: 50
 --- !u!143 &1743683010695716400
 CharacterController:
   m_ObjectHideFlags: 0

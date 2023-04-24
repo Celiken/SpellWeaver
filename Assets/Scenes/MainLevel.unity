@@ -589,7 +589,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 311
+    m_Bits: 823
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -8771,16 +8771,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2052581061215081659, guid: 1a14bb6e9a1e4c04ab1ea1b2d3b715bc,
-        type: 3}
-      propertyPath: MPRegen
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2383487085491938075, guid: 1a14bb6e9a1e4c04ab1ea1b2d3b715bc,
-        type: 3}
-      propertyPath: HPMax
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a14bb6e9a1e4c04ab1ea1b2d3b715bc, type: 3}

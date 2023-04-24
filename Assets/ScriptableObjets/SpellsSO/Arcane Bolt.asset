@@ -15,10 +15,10 @@ MonoBehaviour:
   spellName: Arcane Bolt
   spellIcon: {fileID: 21300000, guid: 4029a9cfeb86f134c9c5af05993eaac8, type: 3}
   spellCooldown: 0.25
-  spellMana: 10
+  spellMana: 0
   spellPrefab: {fileID: 9157512581488151263, guid: 1ddd18420a9e8d64b9be85a52188d4e2,
     type: 3}
   spellType: 0
   spellLifetime: 1
-  spellDamage: 25
+  spellDamage: 10
   spellSpeed: 25
