@@ -69,7 +69,6 @@ public class SpellUI : MonoBehaviour
             GameObject spellObj;
             if (spellSO.spellType == SpellSO.SpellType.Projectile)
             {
-                player.Aim();
                 spellObj = Instantiate(spellSO.spellPrefab, player.GetCastPoint().position, player.GetCastPoint().rotation);
                 spellObj?.GetComponent<ProjectileSpell>().SetSpellSO(spellSO as ProjectileSpellSO);
             }

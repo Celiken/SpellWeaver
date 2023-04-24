@@ -9,7 +9,6 @@ public class GameInput : MonoBehaviour
     public static GameInput Instance;
 
     public event EventHandler OnDash;
-    public event EventHandler OnAim;
 
     private InputActions inputActions;
 
@@ -20,17 +19,11 @@ public class GameInput : MonoBehaviour
         inputActions.Player.Enable();
 
         inputActions.Player.Dash.performed += Dash_performed;
-        inputActions.Player.Aim.performed += Aim_performed;
     }
 
-    private void Aim_performed(InputAction.CallbackContext obj)
+    public Vector2 GetMoveInput()
     {
-        OnAim?.Invoke(this, EventArgs.Empty);
-    }
-
-    public float GetMoveInput()
-    {
-        return inputActions.Player.Move.ReadValue<float>();
+        return inputActions.Player.Move.ReadValue<Vector2>().normalized;
     }
 
     private void Dash_performed(InputAction.CallbackContext obj)
