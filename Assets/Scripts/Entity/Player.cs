@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
-    [SerializeField] private float dashSpeed;
     [SerializeField] private Transform spellCastPoint;
     [SerializeField] private Transform spellAuraPoint;
 
@@ -18,6 +17,7 @@ public class Player : MonoBehaviour
     private CharacterController characterController;
     private NavMeshAgent agent;
 
+    private DashComponent dashComponent;
     private HealthComponent healthComponent;
     private ManaComponent manaComponent;
 
@@ -25,51 +25,44 @@ public class Player : MonoBehaviour
 
     private Vector3 dashDirection;
     private Vector3 lookDirection;
-    private bool isDashing = false;
-    private float dashTimer = 0f;
-    private float dashMaxTimer = 0.1f;
-
-    private float dashCooldownMax = 5f;
-    private float dashCooldown;
 
     private void Awake()
     {
         Instance = this;
+        dashComponent = GetComponent<DashComponent>();
         manaComponent = GetComponent<ManaComponent>();
         healthComponent = GetComponent<HealthComponent>();
         agent = GetComponent<NavMeshAgent>();
         characterController = GetComponent<CharacterController>();
     }
 
-    private void Start()
-    {
-        GameInput.Instance.OnDash += GameInput_OnDash;
-    }
-
     void Update()
     {
-        if (dashCooldown > 0f) dashCooldown -= Time.deltaTime;
-        if (isDashing)
-        {
-            Dash();
-            dashTimer += Time.deltaTime;
-            if (dashTimer > dashMaxTimer)
-            {
-                dashTimer = 0f;
-                isDashing = false;
-                agent.ResetPath();
-            }
-        }
-        else
+        if (!dashComponent.IsDashing())
         {
             Move();
             Aim();
         }
     }
 
-    private void OnDestroy()
+    public bool IsWalking()
     {
-        GameInput.Instance.OnDash -= GameInput_OnDash;
+        return isWalking;
+    }
+
+    public Vector3 GetDashDirection()
+    {
+        return dashDirection;
+    }
+
+    public void SetDashDirection(Vector3 dashDirection)
+    {
+        this.dashDirection = dashDirection;
+    }
+
+    public Vector3 GetLookDirection()
+    {
+        return lookDirection;
     }
 
     private void Move()
@@ -103,20 +96,6 @@ public class Player : MonoBehaviour
         isWalking = moveDir != Vector3.zero;
     }
 
-    private void GameInput_OnDash(object sender, System.EventArgs e)
-    {
-        if (!isWalking)
-        {
-            dashDirection = lookDirection;
-        }
-        if (dashCooldown <= 0f && GameManager.Instance.IsGameStarted())
-        {
-            isDashing = true;
-            dashTimer = 0f;
-            dashCooldown = dashCooldownMax;
-        }
-    }
-
     public void Aim()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -128,14 +107,6 @@ public class Player : MonoBehaviour
                 transform.forward = Vector3.Slerp(transform.forward, lookDirection, Time.deltaTime * rotateSpeed);
             }
         }
-    }
-
-    private void Dash()
-    {
-        float dashDistance = dashSpeed * Time.deltaTime;
-        characterController.Move(dashDirection * dashDistance);
-
-        isWalking = dashDirection != Vector3.zero;
     }
 
     public void GetHit(int damage)
@@ -164,7 +135,7 @@ public class Player : MonoBehaviour
 
     public float GetDashCDPercent()
     {
-        return dashCooldown / dashCooldownMax;
+        return dashComponent.GetDashCD();
     }
 
     public Transform GetCastPoint()

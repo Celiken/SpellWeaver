@@ -387,6 +387,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1743683010695716404}
   - component: {fileID: 1743683010695716405}
+  - component: {fileID: 2806429501819337334}
   - component: {fileID: 2383487085491938075}
   - component: {fileID: 2052581061215081659}
   - component: {fileID: 1743683010695716400}
@@ -433,13 +434,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   rotateSpeed: 10
-  dashSpeed: 50
   spellCastPoint: {fileID: 1743683009816318592}
   spellAuraPoint: {fileID: 1743683010963156852}
   damagePopupPosition: {fileID: 6475356635575143468}
   layerMoveRaycast:
     serializedVersion: 2
     m_Bits: 503
+--- !u!114 &2806429501819337334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743683010695716407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab4d7ffb3c0f9504784ed4f11d4d91bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashSpeed: 5
+  prepostDashingTimer: 0.1
+  dashCooldownMax: 5
+  bodyMat: {fileID: 2100000, guid: 071403a20c1ca1e4b8d8c129f281721a, type: 2}
+  eyesMat: {fileID: 2100000, guid: 93abdc51657f2644abf02bb74016c338, type: 2}
 --- !u!114 &2383487085491938075
 MonoBehaviour:
   m_ObjectHideFlags: 0
