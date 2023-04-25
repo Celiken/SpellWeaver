@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Earth Shatter
   spellIcon: {fileID: 21300000, guid: 14a0f66a7be165c4ba476e3d7c40e390, type: 3}
-  spellCooldown: 10
+  spellCooldown: 5
   spellMana: 200
   spellPrefab: {fileID: 9157512581488151263, guid: a2067f0368d57d04eb5ddd2553f43f99,
     type: 3}

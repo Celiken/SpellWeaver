@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private bool isWalking;
 
     private Vector3 dashDirection;
+    private Vector3 lookDirection;
     private bool isDashing = false;
     private float dashTimer = 0f;
     private float dashMaxTimer = 0.1f;
@@ -104,7 +105,11 @@ public class Player : MonoBehaviour
 
     private void GameInput_OnDash(object sender, System.EventArgs e)
     {
-        if (dashCooldown <= 0f)
+        if (!isWalking)
+        {
+            dashDirection = lookDirection;
+        }
+        if (dashCooldown <= 0f && GameManager.Instance.IsGameStarted())
         {
             isDashing = true;
             dashTimer = 0f;
@@ -119,7 +124,7 @@ public class Player : MonoBehaviour
         {
             if (hit.collider.CompareTag(TagConstants.GROUND))
             {
-                Vector3 lookDirection = (hit.point - transform.position).normalized;
+                lookDirection = (hit.point - transform.position).normalized;
                 transform.forward = Vector3.Slerp(transform.forward, lookDirection, Time.deltaTime * rotateSpeed);
             }
         }
@@ -131,8 +136,6 @@ public class Player : MonoBehaviour
         characterController.Move(dashDirection * dashDistance);
 
         isWalking = dashDirection != Vector3.zero;
-
-        transform.forward = dashDirection;
     }
 
     public void GetHit(int damage)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spellName: Blizzard
   spellIcon: {fileID: 21300000, guid: f5ab3f534c1138f4786f23cd74103223, type: 3}
-  spellCooldown: 15
+  spellCooldown: 10
   spellMana: 250
   spellPrefab: {fileID: 9157512581488151263, guid: be11b41d434f80c4793b8a4baaba1ef7,
     type: 3}
