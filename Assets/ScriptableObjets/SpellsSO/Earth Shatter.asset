@@ -18,7 +18,7 @@ MonoBehaviour:
   spellMana: 200
   spellPrefab: {fileID: 9157512581488151263, guid: a2067f0368d57d04eb5ddd2553f43f99,
     type: 3}
-  spellType: 2
+  spellType: 1
   spellLifetime: 1
   spellDamage: 15
   spellTick: 5

@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MPMax: 1000
-  MPRegen: 50
+  MPRegen: 100
 --- !u!143 &1743683010695716400
 CharacterController:
   m_ObjectHideFlags: 0
